@@ -2,8 +2,6 @@ FROM scratch AS rootfs
 
 COPY ["./entrypoint.sh", "/usr/local/bin/"]
 
-
-
 # Main image
 FROM alpine:3.15
 
@@ -17,7 +15,6 @@ RUN set -eux \
     && echo "nfsd        /proc/fs/nfsd            nfsd        defaults  0  0" >> /etc/fstab
 
 COPY --from=rootfs ["/", "/"]
-LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>"
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 EXPOSE 2049
